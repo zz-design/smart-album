@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Photoalbum import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),#admin账号zzh 密码aa23fve6（需要自创建）
+    path('getAllimg/', views.getAllimg),
+    path('addimg/', views.addimg),
+
 
 ]
