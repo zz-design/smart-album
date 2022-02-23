@@ -1,6 +1,5 @@
 import requests
-from .tools import urltoBase64
-
+from Photoalbum.tools import urltoBase64
 #百度api
 
 def gettoken():
@@ -21,7 +20,9 @@ def facedetect(base64_img,at):
     access_token = at
     request_url = request_url + "?access_token=" + access_token
     headers = {'content-type': 'application/json'}
-    response = requests.post(request_url, data=params, headers=headers)
+
+    proxies = {"http": None, "https": None}
+    response = requests.post(request_url, data=params, headers=headers,proxies=proxies)
     if response:
         print(response.json())
         return response.json()
@@ -84,7 +85,27 @@ def getuserlist(at,group_id):
     response = requests.post(request_url, data=params, headers=headers)
     if response:
         print(response.json()['result']['user_id_list'])
-        return response.json()['result']['user_id_list']
+        if response.json()['error_code'] == 0:
+             return response.json()['result']['user_id_list']
+
+def getuserface(at,group_id,user_id):
+    '''
+    获取用户人脸列表
+    '''
+    params = {
+        "user_id" : user_id,
+        "group_id": group_id,
+    }
+    request_url = "https://aip.baidubce.com/rest/2.0/face/v3/faceset/face/getlist"
+    access_token = at
+    request_url = request_url + "?access_token=" + access_token
+    headers = {'content-type': 'application/json'}
+    response = requests.post(request_url, data=params, headers=headers)
+    if response:
+        print(response.json())
+        if  response.json()['error_code']==0:
+            return response.json()['result']['face_list']
+
 
 def addface(at,group_id,user_id,face):
     '''
@@ -106,9 +127,9 @@ def addface(at,group_id,user_id,face):
     response = requests.post(request_url, data=params, headers=headers)
     if response:
         print(response.json())
+        return response.json()
 
 if __name__ == '__main__':
     at=gettoken()
-    #at="24.8d2fdaebfdc8a6a6d843bcf83fbb7ae4.2592000.1647179415.282335-25537142"
-    facet='8bc87924892e218b97aa03f3e127900a'
-    addface(at,'01','0',facet)
+    getuserface(at,'01','1')
+

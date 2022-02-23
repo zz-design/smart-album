@@ -20,7 +20,12 @@ from Photoalbum import views
 urlpatterns = [
     path('admin/', admin.site.urls),#admin账号zzh 密码aa23fve6（需要自创建）
     path('getAllimg/', views.getAllimg),
-    path('addimg/', views.addimg),
+    #path('addimg/', views.addimg),
+    path('uploadimg/', views.uploadimg),
+    path('getfacelist/', views.getfacelist),
+    path('face_process/', views.face_process),
+    path('update_info/', views.update_info),
+    path('test/', views.test),
 
 
 ]

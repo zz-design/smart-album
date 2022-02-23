@@ -101,15 +101,22 @@ class Face(models.Model):
     class Meta:
         db_table = 'face'
 
-class Facelist_info(models.Model):
-    group_id=models.ForeignKey(User,on_delete=models.CASCADE,db_column='u_id')
-    user_id = models.CharField('user_id',max_length=50)
-    user_info = models.CharField('user_info',max_length=50)
+class Group_person(models.Model):
+    group_id = models.ForeignKey(User,on_delete=models.CASCADE,db_column='u_id')
+    person_id = models.CharField('person_id',max_length=50)
+    person_info = models.CharField('person_info', max_length=50,null=True, blank=True)
 
     class Meta:
-        db_table = 'facelist_info'
-        unique_together = ("group_id", "user_id")
+        db_table = 'group_person'
+        unique_together = ("group_id", "person_id")
 
+class Person_face(models.Model):
+    group_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='u_id', null=True, blank=True)
+    person_id = models.CharField('person_id',max_length=50)
+    face_id = models.ForeignKey(Face,on_delete=models.CASCADE,db_column='face_id')
 
+    class Meta:
+        db_table = 'person_face'
+        unique_together = ("group_id", "person_id", "face_id")
 
 

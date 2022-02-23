@@ -32,7 +32,7 @@ def compress_image(infile, outfile='./static/temp', maxkb=2000, step=20, quality
     :return: 压缩文件地址，压缩文件大小
     """
 
-    outfile=outfile+infile[-4:]
+    outfile=outfile+infile[infile.rfind('.'):]
     o_size = get_size(infile)
     if o_size <= maxkb:
         return infile
@@ -53,7 +53,7 @@ def resize_image(infile, outfile='./static/temp'):
     :param x_s: 设置的宽度
     :return:
     """
-    outfile = outfile + infile[-4:]
+    outfile=outfile+infile[infile.rfind('.'):]
     maxw = 1920
     maxh = 1080
     img = Image.open(infile)

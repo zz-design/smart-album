@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Img,User,User_img,Share,ShareAlbum,Friends,User_SA,User_Share,S_picture,SA_upload,SAU_picture,Face,Facelist_info
+from .models import Img,User,User_img,Share,ShareAlbum,Friends,User_SA,User_Share,S_picture,SA_upload,SAU_picture,Face,Person_face,Group_person
 
 @admin.register(Img)
 class  ImgAdmin(admin.ModelAdmin):
@@ -49,7 +49,17 @@ class SAU_pictureAdmin(admin.ModelAdmin):
 class FaceAdmin(admin.ModelAdmin):
     list_display = ('face_id','face_token','img_id')
 
-@admin.register(Facelist_info)
-class Facelist_infoAdmin(admin.ModelAdmin):
-    list_display = ('group_id','user_id','user_info')
+@admin.register(Group_person)
+class Group_personAdmin(admin.ModelAdmin):
+    list_display = ('group_id', 'person_id', 'person_info')
+
+@admin.register(Person_face)
+class Person_faceAdmin(admin.ModelAdmin):
+    list_display = ('group_id', 'person_id', 'face_id')
+
+
+
+
+
+
 # Register your models here.
