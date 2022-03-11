@@ -2,7 +2,7 @@ import requests
 from Photoalbum.tools import urltoBase64
 #百度api
 
-def gettoken():
+def gettoken():#人脸
     # client_id 为官网获取的AK， client_secret 为官网获取的SK
     id = 'VfSs9gnVtF9CaPCHHEKgvX2Z'
     secret = 'TIaSwlyW4YjkGVZxoMvsm6OOvCXlO0qR'
@@ -11,6 +11,30 @@ def gettoken():
     if response:
         print(response.json().get("access_token"))
         return response.json().get("access_token")
+
+def gettoken1():#图像识别
+    # client_id 为官网获取的AK， client_secret 为官网获取的SK
+    id = '7XjBzjBKFOmDO9ol7w0WS04z'
+    secret = 'AjsYBAImMaquBxEvzslUjtiTcM0PZNzn'
+    host = 'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=' + id + '&client_secret=' + secret
+    response = requests.get(host)
+    if response:
+        print(response.json().get("access_token"))
+        return response.json().get("access_token")
+
+def generalDetect(base64_img,at):
+    params = {}
+    params["image"] = base64_img
+    request_url = "https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general"
+    access_token = at
+    request_url = request_url + "?access_token=" + access_token
+    headers = {'content-type': 'application/json'}
+
+    proxies = {"http": None, "https": None}
+    response = requests.post(request_url, data=params, headers=headers, proxies=proxies)
+    if response:
+        print(response.json())
+        return response.json()
 
 def facedetect(base64_img,at):
     params={}

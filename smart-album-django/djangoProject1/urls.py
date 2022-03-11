@@ -25,6 +25,16 @@ urlpatterns = [
     path('getfacelist/', views.getfacelist),
     path('face_process/', views.face_process),
     path('update_info/', views.update_info),
+    path('search_img/', views.search_img),
+    path('getUser_id/', views.getUser_id),
+    path('getGeneral/', views.getGeneral),
+    path('create_ShareAlbum/', views.create_ShareAlbum),
+    path('get_UserShareAlbum/', views.get_UserShareAlbum),
+    path('get_AlbumInfo/', views.get_AlbumInfo),
+    path('upload_ShareAlbum/', views.upload_ShareAlbum),
+    path('upload_SA_img/', views.upload_SA_img),
+
+
     path('test/', views.test),
 
 

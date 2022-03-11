@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Img,User,User_img,Share,ShareAlbum,Friends,User_SA,User_Share,S_picture,SA_upload,SAU_picture,Face,Person_face,Group_person
+from .models import Img,User,User_img,Share,ShareAlbum,Friends,User_SA,User_Share,S_picture,SA_upload,SAU_picture,Face,Person_face,Group_person,Class,Class_Img
 
 @admin.register(Img)
 class  ImgAdmin(admin.ModelAdmin):
@@ -7,7 +7,7 @@ class  ImgAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('u_id','username')
+    list_display = ('u_id','openid','username','avatarUrl')
 
 @admin.register(User_img)
 class User_imgAdmin(admin.ModelAdmin):
@@ -31,7 +31,7 @@ class User_ShareAdmin(admin.ModelAdmin):
 
 @admin.register(ShareAlbum)
 class ShareAlbumAdmin(admin.ModelAdmin):
-    list_display = ('sa_id','sa_name','text','time')
+    list_display = ('sa_id','sa_name','time')
 
 @admin.register(User_SA)
 class User_SAAdmin(admin.ModelAdmin):
@@ -39,7 +39,7 @@ class User_SAAdmin(admin.ModelAdmin):
 
 @admin.register(SA_upload)
 class SA_uploadAdmin(admin.ModelAdmin):
-    list_display = ('sau_id', 'u_id','sa_id','time')
+    list_display = ('sau_id', 'u_id','sa_id','time','text')
 
 @admin.register(SAU_picture)
 class SAU_pictureAdmin(admin.ModelAdmin):
@@ -57,6 +57,13 @@ class Group_personAdmin(admin.ModelAdmin):
 class Person_faceAdmin(admin.ModelAdmin):
     list_display = ('group_id', 'person_id', 'face_id')
 
+@admin.register(Class)
+class ClassAdmin(admin.ModelAdmin):
+    list_display = ('c_id', 'classname')
+
+@admin.register(Class_Img)
+class Class_ImgAdmin(admin.ModelAdmin):
+    list_display = ('c_id', 'img_id')
 
 
 

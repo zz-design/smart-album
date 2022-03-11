@@ -13,7 +13,9 @@ class Img(models.Model):
 
 class User(models.Model):
     u_id=models.AutoField('id',primary_key=True)
+    openid=models.CharField('openid',max_length=50,null=True, blank=True)
     username=models.CharField('用户名',max_length=20)
+    avatarUrl=models.CharField('头像',max_length=200,null=True, blank=True)
 
     class Meta:
         db_table='user'
@@ -62,7 +64,6 @@ class User_Share(models.Model):
 class ShareAlbum(models.Model):
     sa_id = models.AutoField('id', primary_key=True)
     sa_name = models.CharField('相册名', max_length=20,null=True, blank=True)
-    text = models.CharField('文案',max_length=100,null=True, blank=True)
     time = models.DateField('时间', max_length=20)
     #imgs = models.CharField('图片', max_length=100,null=True, blank=True)
 
@@ -82,6 +83,7 @@ class SA_upload(models.Model):
     u_id=models.ForeignKey(User,on_delete=models.CASCADE,db_column='u_id')
     sa_id=models.ForeignKey(ShareAlbum,on_delete=models.CASCADE,db_column='sa_id')
     time = models.DateField('时间', max_length=20)
+    text = models.CharField('文案',max_length=100,null=True, blank=True)
 
     class Meta:
         db_table='sa_upload'
@@ -118,5 +120,20 @@ class Person_face(models.Model):
     class Meta:
         db_table = 'person_face'
         unique_together = ("group_id", "person_id", "face_id")
+
+class Class(models.Model):
+    c_id = models.AutoField('c_id',primary_key=True)
+    classname = models.CharField('classname',max_length=50)
+
+    class Meta:
+        db_table = 'class'
+
+class Class_Img(models.Model):
+    c_id = models.ForeignKey(Class, on_delete=models.CASCADE, db_column='c_id')
+    img_id = models.ForeignKey(Img, on_delete=models.CASCADE, db_column='img_id')
+
+    class Meta:
+        db_table = 'class_img'
+        unique_together = ("c_id", "img_id")
 
 
